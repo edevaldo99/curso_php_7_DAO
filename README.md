@@ -1,1 +1,1 @@
-# curso_php_7_DAO
+# Classe referente ao DAO desenvolvido em curso PHP
