@@ -10,15 +10,15 @@ class Sql extends PDO{//Estende da classe PDO
 	}
 
 	//Vai fazendo o bindParam com a function setParam
-	private function setParams($statment, $parameters = array()){
+	private function setParams($statement, $parameters = array()){
 		foreach ($parameters as $key => $value) {
-			$this->setParam($key, $value);
+			$this->setParam($statement, $key, $value);
 		}
 	}
 
 	//faz um bindParam de cada vez a cada chamada do metodo setParam
-	public function setParam($statment, $key, $value){
-		$statment->bindParam($key, $value);
+	public function setParam($statement, $key, $value){
+		$statement->bindParam($key, $value);
 	}
 
 	//Execulta a query SQL
