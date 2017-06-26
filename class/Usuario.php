@@ -49,10 +49,7 @@ class Usuario {
 		if(count($results) > 0){
 			$row = $results[0];
 
-			$this->setId($row['id']);
-			$this->setLogin($row['login']);
-			$this->setSenha($row['senha']);
-			$this->setCadastro(new DateTime($row['cadastro']));
+			$this->setData($results[0]);
 		}
 	}
 
@@ -80,15 +77,40 @@ class Usuario {
 			));
 		if(count($total) > 0){
 			$row = $total[0];
-			$this->setId($row['id']);
-			$this->setLogin($row['login']);
-			$this->setSenha($row['senha']);
-			$this->setCadastro(new DateTime($row['cadastro']));
+			$this->setData($row);
 		}else{
 			throw new Exception("Login e/ou senha inválidos.");
-		};
+		}
 	}
 
+	//Insere um usuario na tabela atraver de store procedure e retorna para a variavel todos os dados que foram inseridos
+	public function insert(){
+		$sql = new Sql();
+		$results = $sql->select("CALL sp_usuarios_insert(:LOGIN, :PASSWORD)", array(
+			":LOGIN"=>$this->getLogin(),
+			":PASSWORD"=>$this->getSenha()
+			));
+		if(count($results) > 0){
+			$this->setData($results[0]);
+		};
+
+	}
+
+	//Atribui os valores as variaveis da classe que são passadas através de um array
+	public function setData($data){
+			$this->setId($data['id']);
+			$this->setLogin($data['login']);
+			$this->setSenha($data['senha']);
+			$this->setCadastro(new DateTime($data['cadastro']));
+	}
+
+	//Ao instanciar a classe automaticamente cria um usuario. Se não quiser criar, apenas não passar argumentos.
+	public function __construct($login = "", $senha = ""){
+		$this->setLogin($login);
+		$this->setSenha($senha);
+	}
+
+	//Função que mostra todas as informações da Classe Usuario
 	public function __toString(){
 		return json_encode(array(
 			"id"=>$this->getId(),
