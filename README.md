@@ -1,1 +1,1 @@
-# Classe referente ao DAO desenvolvido em curso PHP
+# Repositório referente ao uso do DAO no PHP
