@@ -42,4 +42,9 @@ $altera->loadById(8);//Primeiro carrega o usuario, o sistema saber qual carregar
 $altera->update("professor", "pr0f3ss0R");
 */
 
+//Delete um usuario
+$delete = new Usuario();
+$delete->loadById(5);
+$delete->delete();
+
 ?>

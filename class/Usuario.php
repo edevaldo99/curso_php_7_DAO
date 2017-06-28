@@ -108,6 +108,15 @@ class Usuario {
 			));
 	}
 
+	public function delete(){
+		$sql = new SQL();
+		$sql->query("DELETE FROM tb_usuarios WHERE id = :ID", array(":ID"=>$this->getId()));
+		$this->setId(0);
+		$this->setLogin("");
+		$this->setSenha("");
+		$this->setData(null);
+	}
+
 	//Atribui os valores as variaveis da classe que são passadas através de um array
 	public function setData($data){
 			$this->setId($data['id']);
