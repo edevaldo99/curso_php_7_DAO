@@ -96,6 +96,18 @@ class Usuario {
 
 	}
 
+	public function update($login, $password){
+		$this->setLogin($login);
+		$this->setSenha($password);
+
+		$sql = new Sql();
+		$sql->query("UPDATE tb_usuarios set login = :LOGIN, senha = :PASSWORD WHERE id = :ID", array(
+			":LOGIN"=>$this->getLogin(),
+			":PASSWORD"=>$this->getSenha(),
+			":ID"=>$this->getId()
+			));
+	}
+
 	//Atribui os valores as variaveis da classe que são passadas através de um array
 	public function setData($data){
 			$this->setId($data['id']);
